@@ -101,7 +101,7 @@ export default function RoutineView({
          >
             <div className='bar mx-auto h-[0.3rem] w-12 rounded-full bg-[#77777744]'></div>
             <div className='mb-5'>
-               <p className='text-balance mb-6 mt-5 line-clamp-2 px-[10%] text-center text-lg font-medium'>
+               <p className='mb-6 mt-5 line-clamp-2 text-balance px-[10%] text-center text-lg font-medium'>
                   {expired ? expiredRoutines![index].name : routines[index].name}
                </p>
                {expired ? (
@@ -167,6 +167,7 @@ async function shareRoutine(routine: Routine, index: number) {
    const backup: BackupType = {
       routines: [routine],
       subscriptions: [],
+      notes: [],
    };
 
    if (navigator.share) {
