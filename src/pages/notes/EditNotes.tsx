@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Check, ChevronLeft, Pencil, Trash2 } from 'lucide-react';
 import ls from '../../lib/storage';
+import BackHeader from '../../components/BackHeader';
 
 export default function Edit() {
    const { state } = useLocation();
@@ -58,41 +59,14 @@ export default function Edit() {
 
    return (
       <div className='bg-white text-black dark:bg-black dark:text-white'>
-         <div className='h-[100dvh]  px-2 py-5 '>
-            <div className='flex items-center justify-between'>
-               <Link to='/notes'>
-                  <ChevronLeft size={38} />
-               </Link>
-
-               <div className='flex gap-5 pr-5'>
-                  {isEdited ? (
-                     <Check
-                        onClick={() => window.history.back()}
-                        size={28}
-                        strokeWidth={2.2}
-                        className='text-blue-700'
-                     />
-                  ) : (
-                     <Pencil
-                        onClick={() => {
-                           const textarea = inputRef.current;
-                           if (textarea) {
-                              textarea.focus();
-                              textarea.setSelectionRange(textarea.value.length, textarea.value.length);
-                           }
-                        }}
-                     />
-                  )}
-                  <Trash2 className='text-red-600' onClick={() => setDelAlert(true)} />
-               </div>
-            </div>
-
-            <div className=' mt-12 '>
+         <div className='h-[100dvh]'>
+            <BackHeader title='Edit Note' rightIcon='delete' />
+            <div className='px-6'>
                <input
                   type='text'
                   name=''
                   id=''
-                  className='w-full bg-transparent px-4 py-4 text-3xl font-semibold outline-none'
+                  className='w-full bg-transparent py-3 text-xl font-semibold outline-none'
                   placeholder='Title'
                   value={title}
                   onChange={(e) => {
@@ -102,7 +76,7 @@ export default function Edit() {
                />
                <textarea
                   placeholder='Note Something down'
-                  className='text-align-top h-[50dvh] w-full bg-transparent px-4 text-lg outline-none '
+                  className='text-align-top h-[50dvh] w-full bg-transparent text-sm outline-none '
                   value={content}
                   onChange={(e) => {
                      setContent(e.target.value);
@@ -112,39 +86,6 @@ export default function Edit() {
                />
             </div>
          </div>
-         {delAlert ? (
-            <>
-               <div
-                  className='fixed left-0 top-0 h-full w-full bg-transparent backdrop-blur-md'
-                  onClick={() => {
-                     setDelAlert(false);
-                  }}
-               ></div>
-               <div className='fixed bottom-4 left-[4%] w-[92%] space-y-6 rounded-3xl border-2 border-white/5 bg-slate-950/50 object-none px-4 pb-4 pt-8 backdrop-blur-md '>
-                  <div className='text-center text-xl font-semibold'>Do you want to delete this Note ?</div>
-                  <div className='p-2 text-center text-sm opacity-50'>
-                     This action cannot be undone. This will permanently delete. <thead></thead>
-                  </div>
-                  <div className='grid grid-cols-2 gap-5'>
-                     <Button
-                        text='No'
-                        onClick={() => {
-                           setDelAlert(false);
-                        }}
-                     />
-                     <Button
-                        text='Delete'
-                        onClick={() => {
-                           delNote();
-                           window.history.back();
-                        }}
-                     />
-                  </div>
-               </div>
-            </>
-         ) : (
-            <></>
-         )}
       </div>
    );
 }

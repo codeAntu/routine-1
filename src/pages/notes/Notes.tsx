@@ -6,6 +6,7 @@ import FloatingButton from '../../components/FloatingButton';
 import Watermark from '../../components/Watermark';
 import More from '../More';
 import ls from '../../lib/storage';
+import BackHeader from '../../components/BackHeader';
 
 export default function Home() {
    const [notes, setNotes] = useState([]) as any;
@@ -39,7 +40,7 @@ export default function Home() {
             }}
          />
 
-         <div className=' min-h-[60dvh] px-7'>
+         <div className=' min-h-[60dvh] p-5'>
             {search.length === 0 ? showNotes(notes, navigate) : showNotes(searchedNotes, navigate)}
          </div>
 
@@ -51,12 +52,12 @@ export default function Home() {
 
 function showNotes(notes: any, navigate: any) {
    return (
-      <div className='mt-8 grid auto-cols-min grid-cols-2 gap-4'>
+      <div className='grid auto-cols-min grid-cols-2 gap-4 '>
          {notes.map((note: any) => {
             return (
                <div
                   key={note.id}
-                  className='text-ellipsis rounded-2xl border border-black/5 bg-black/5 p-2.5 dark:border-white/5 dark:bg-white/5 '
+                  className='rounded-2xl border border-black/5 bg-black/5 p-3 dark:border-white/5 dark:bg-white/5'
                   onClick={() => navigate('/notes/edit', { state: note })}
                >
                   {getNote(note)}
@@ -69,9 +70,9 @@ function showNotes(notes: any, navigate: any) {
 
 function getNote(note: any) {
    return (
-      <div className='text-over h-20 overflow-hidden text-ellipsis py-1.5'>
-         <div className='pb-1 text-2xl font-semibold'>{note.title}</div>
-         <div className='text-sm opacity-60'>{note.content}</div>
-      </div>
+      <>
+         <div className='line-clamp-1 text-sm font-semibold'>{note.title}</div>
+         <div className='line-clamp-2 text-[0.8rem] opacity-60'>{note.content}</div>
+      </>
    );
 }

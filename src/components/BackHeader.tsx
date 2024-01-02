@@ -4,7 +4,17 @@ import icons from '../assets/icons/icons';
 import headerIntersect from '../lib/headerIntersect';
 import delay from '../lib/delay';
 
-function BackHeader({ title, backCb }: { title: string; backCb?: Function }) {
+function BackHeader({
+   title,
+   backCb,
+   rightIcon,
+   RightIconOnClick,
+}: {
+   title: string;
+   backCb?: Function;
+   rightIcon?: string;
+   RightIconOnClick?: any;
+}) {
    const navigate = useNavigate();
    const topElement = useRef<HTMLDivElement>(null);
    const [isIntersecting, setIsIntersecting] = useState(true);
@@ -27,6 +37,9 @@ function BackHeader({ title, backCb }: { title: string; backCb?: Function }) {
                <div className='right tap opacity-0'>
                   <img src={icons.left_arrow_long_solid} className='w-10 dark:grayscale dark:invert' />
                </div>
+               {rightIcon && (
+                  <img src={icons.deleteIcon} onClick={RightIconOnClick} className='w-5 dark:grayscale dark:invert' />
+               )}
             </header>
          </div>
       </>

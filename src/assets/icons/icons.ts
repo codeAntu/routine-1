@@ -42,6 +42,7 @@ import telegram_dark from './src/telegram_dark.svg';
 import search_black_48dp from './src/search_black_48dp.svg';
 import bag from './src/bag.svg';
 import edit_square from './src/edit_square.svg';
+import deleteIcon from './src/delete.svg';
 
 const icons = {
    Lock,
@@ -87,6 +88,7 @@ const icons = {
    restore_file,
    app_icon_transparent_256,
    telegram_dark,
+   deleteIcon,
 };
 
 export default icons;

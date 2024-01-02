@@ -2,6 +2,7 @@ import { ChevronLeft } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ls from '../../lib/storage';
+import BackHeader from '../../components/BackHeader';
 
 export default function Add() {
    const [title, setTitle] = useState('');
@@ -45,34 +46,33 @@ export default function Add() {
    }, []);
 
    return (
-      <div className='h-[100dvh] bg-white px-2 py-5 text-black dark:bg-black dark:text-white'>
-         <div className='flex items-center justify-between'>
-            <Link to='/notes'>
-               <ChevronLeft size={38} />
-            </Link>
-
-            <div className='pr-5 text-2xl font-medium' onClick={() => window.history.back()}>
-               Save
+      <div className='bg-white text-black dark:bg-black dark:text-white'>
+         <div className='h-[100dvh] '>
+            <BackHeader title='Note' />
+            <div className='px-6'>
+               <input
+                  type='text'
+                  name=''
+                  id=''
+                  className='w-full bg-transparent py-3 text-xl font-semibold outline-none'
+                  placeholder='Title'
+                  value={title}
+                  onChange={(e) => {
+                     setTitle(e.target.value);
+                     // setIsEdited(true);
+                  }}
+               />
+               <textarea
+                  placeholder='Note Something down'
+                  className='text-align-top h-[50dvh] w-full bg-transparent text-sm outline-none '
+                  value={content}
+                  onChange={(e) => {
+                     setContent(e.target.value);
+                     // setIsEdited(true);
+                  }}
+                  ref={inputRef}
+               />
             </div>
-         </div>
-
-         <div className=' mt-12 '>
-            <input
-               type='text'
-               name=''
-               id=''
-               className='w-full bg-transparent px-4 py-4 text-3xl font-semibold outline-none'
-               placeholder='Title'
-               value={title}
-               onChange={(e) => setTitle(e.target.value)}
-            />
-            <textarea
-               placeholder='Note Something down'
-               className='text-align-top h-[50dvh] w-full bg-transparent px-4 text-lg outline-none '
-               value={content}
-               onChange={(e) => setContent(e.target.value)}
-               ref={inputRef}
-            />
          </div>
       </div>
    );
